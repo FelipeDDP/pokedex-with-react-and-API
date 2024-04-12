@@ -1,6 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import { baseUrl } from "../../variables/variables";
 import { useState, useEffect } from "react";
+import styled from 'styled-components';
 
 export const PokemonDetails = () => {
 
@@ -8,6 +9,7 @@ export const PokemonDetails = () => {
     const [details, setDetails] = useState({
         name: '',
         sprite: '',
+        animation: '',
     })
 
     useEffect(() => {
@@ -18,6 +20,7 @@ export const PokemonDetails = () => {
             const pokemonDetails = {
                 name: pokemonData.name,
                 sprite: pokemonData.sprites.front_default,
+                animation: pokemonData.sprites.other.showdown.front_default,
             }
             console.log(pokemonDetails)
             setDetails(pokemonDetails)
@@ -31,9 +34,14 @@ export const PokemonDetails = () => {
         <>
             <Link to="/">Back to list</Link>
             <div>
-                <img src={details.sprite} />
+                <Img src={details.animation} />
                 <h2>{details.name}</h2>
             </div>
         </>
     )
 }
+
+const Img = styled.img`
+    image-rendering: pixelated;
+`
+

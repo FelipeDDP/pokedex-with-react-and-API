@@ -14,4 +14,13 @@ export const GlobalStyle = createGlobalStyle`
     ul {
         list-style: none;
     }
+
+    @font-face {
+        font-family: 'Pokemon Classic';
+        src: local(''), format('ttf'), url('/fonts/PokemonClassic.ttf');
+    }
+
+    body {
+        font-family: 'Pokemon Classic';
+    }
 `

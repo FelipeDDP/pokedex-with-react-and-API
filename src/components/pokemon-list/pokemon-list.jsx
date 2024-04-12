@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { baseUrl, limitPerPage } from "../../variables/variables";
 import { getPokemonUrls } from "../../services/get-pokemon-urls";
-import { Link } from 'react-router-dom'
-// import { PokemonThumb } from "../pokemon-thumb/pokemon-thumb";
+import styled from 'styled-components'
+import { ThemeContext } from '../../contexts/theme-context';
+import { PokemonThumb } from '../pokemon-thumb/pokemon-thumb';
 
 export const PokemonList = () => {
 
@@ -29,7 +30,10 @@ export const PokemonList = () => {
             const pokemonData = jsons.map(pokemon => {
                 return {
                     name: pokemon.name,
+                    id: pokemon.id,
                     sprite: pokemon.sprites.front_default,
+                    animation: pokemon.sprites.other.showdown.front_default,
+                    icon: pokemon.sprites.versions["generation-vii"].icons.front_default,
                 }
             }
             )
@@ -48,34 +52,37 @@ export const PokemonList = () => {
     // console.log(shown)
 
     const nextPage = () => {
-        setOffset(shown)
+        const currentOffset = shown + offset
+        setOffset(currentOffset)
     }
 
     // console.log('offset ' + offset)
 
+    const { theme } = useContext(ThemeContext)
+
     return (
-        <section>
-            <ul>
-                {/* <PokemonThumb list={list} /> */}
-                {pokemonData.map((pokemon, index) => {
-                    return (
-                        <li key={index}>
-                            <div>
-                                <Link to={`/${pokemon.name}`}>
-                                <img src={pokemon.sprite} />
-                                <p>{pokemon.name}</p>
-                                </Link>
-                            </div>
-                        </li>
-                    )
-                })}
-            </ul>
+        <Section>
+            <Ul>
+                <PokemonThumb data={pokemonData} />
+            </Ul>
             <button
                 onClick={loadMorePokemon}
             >Show more</button>
             <button
                 onClick={nextPage}
             >Next page</button>
-        </section>
+        </Section>
     )
 }
+
+
+const Section = styled.section`
+    max-width: 1000px;
+    padding: 30px;
+    margin: 30px;
+    border-radius: 20px;
+`
+
+const Ul = styled.ul`
+    
+`
