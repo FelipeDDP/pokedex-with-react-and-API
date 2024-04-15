@@ -1,14 +1,15 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Lists } from "./lists";
+import { Route, createBrowserRouter, createRoutesFromElements } from "react-router-dom";
+import App from "../App";
+import ErrorPage from "./ErrorPage/ErrorPage";
 import { Details } from "./details";
 
-export const AppRoutes = () => {
-    return (
-        <BrowserRouter>
-            <Routes>
-                <Route exact path='/' element={<Lists />} />
-                <Route exact path='/:name' element={<Details />} />
-            </Routes>
-        </BrowserRouter>
+export const router = createBrowserRouter(
+    createRoutesFromElements(
+        <>
+            <Route path="/" element={<App />} errorElement={<ErrorPage />}>
+                <Route path="/:name" element={<Details />} />
+            </Route>
+            
+        </>
     )
-}
+)

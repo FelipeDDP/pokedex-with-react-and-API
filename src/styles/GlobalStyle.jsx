@@ -22,5 +22,11 @@ export const GlobalStyle = createGlobalStyle`
 
     body {
         font-family: 'Pokemon Classic';
+        height: 100vh;
     }
+
+    /* #root {
+        height: 100%;
+        display: flex;
+    } */
 `

@@ -31,13 +31,13 @@ export const PokemonDetails = () => {
     console.log(details)
 
     return (
-        <>
+        <section>
             <Link to="/">Back to list</Link>
             <div>
                 <Img src={details.animation} />
                 <h2>{details.name}</h2>
             </div>
-        </>
+        </section>
     )
 }
 

@@ -1,9 +1,9 @@
 import { useEffect, useState, useContext } from "react";
 import { baseUrl, limitPerPage } from "../../variables/variables";
-import { getPokemonUrls } from "../../services/get-pokemon-urls";
-import styled from 'styled-components'
+// import { getPokemonUrls } from "../../services/get-pokemon-urls";
 import { ThemeContext } from '../../contexts/theme-context';
 import { PokemonThumb } from '../pokemon-thumb/pokemon-thumb';
+import { Section } from "./style";
 
 export const PokemonList = () => {
 
@@ -13,7 +13,18 @@ export const PokemonList = () => {
     const [offset, setOffset] = useState(0)
 
     useEffect(() => {
-        getPokemonUrls(baseUrl, shown, offset, setUrlList)
+         const getPokemonUrls = async () => {
+            const response = await fetch(`${baseUrl}/?limit=${shown}&offset=${offset}`)
+            const pokemons = await response.json()
+            // console.log(pokemons)
+            // console.log(pokemons.results)
+            const urls = pokemons.results.map((pokemon) => {
+                return pokemon.url
+            })
+            setUrlList(urls)
+        }
+        getPokemonUrls()
+        // getPokemonUrls(baseUrl, shown, offset, setUrlList)
     }, [shown, offset])
 
     // console.log(urlList)
@@ -37,6 +48,7 @@ export const PokemonList = () => {
                 }
             }
             )
+            console.log(pokemonData)
             setPokemonData(pokemonData)
         }
         fetchPokemonData()
@@ -62,9 +74,9 @@ export const PokemonList = () => {
 
     return (
         <Section>
-            <Ul>
+            <ul>
                 <PokemonThumb data={pokemonData} />
-            </Ul>
+            </ul>
             <button
                 onClick={loadMorePokemon}
             >Show more</button>
@@ -74,15 +86,3 @@ export const PokemonList = () => {
         </Section>
     )
 }
-
-
-const Section = styled.section`
-    max-width: 1000px;
-    padding: 30px;
-    margin: 30px;
-    border-radius: 20px;
-`
-
-const Ul = styled.ul`
-    
-`
