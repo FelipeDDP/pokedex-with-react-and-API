@@ -61,6 +61,11 @@ export const PokemonList = () => {
         setShown(shownPerPage)
     }
 
+    const loadLessPokemon = () => {
+        const shownperpage = shown - limitPerPage
+        setShown(shownperpage)
+    }
+
     // console.log(shown)
 
     const nextPage = () => {
@@ -77,12 +82,9 @@ export const PokemonList = () => {
             <ul>
                 <PokemonThumb data={pokemonData} />
             </ul>
-            <button
-                onClick={loadMorePokemon}
-            >Show more</button>
-            <button
-                onClick={nextPage}
-            >Next page</button>
+            <button onClick={loadMorePokemon}>Show more</button>
+            <button onClick={loadLessPokemon}>Show less</button>
+            <button onClick={nextPage}>Next page</button>
         </Section>
     )
 }

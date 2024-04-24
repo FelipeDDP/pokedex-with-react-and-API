@@ -6,8 +6,15 @@ import { Details } from "./details";
 export const router = createBrowserRouter(
     createRoutesFromElements(
         <>
-            <Route path="/" element={<App />} errorElement={<ErrorPage />}>
-                <Route path="/:name" element={<Details />} />
+            <Route 
+                path="/" 
+                element={<App />} 
+                errorElement={<ErrorPage />} 
+                >
+                <Route 
+                    path="/:name" 
+                    element={<Details />}
+                    />
             </Route>
             
         </>

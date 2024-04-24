@@ -5,7 +5,6 @@ import { useContext } from 'react';
 
 export const PokemonThumb = ({ data }) => {
   console.log(data)
-
   const { theme } = useContext(ThemeContext)
 
   const numberOfDigits = (pokemon) => {
@@ -21,7 +20,7 @@ export const PokemonThumb = ({ data }) => {
         return (
           <li key={index}>
             <Link to={`/${pokemon.name}`}>
-              <Number>{`${digits}${pokemon.id}`}</Number>
+              <Number>{digits}{pokemon.id}</Number>
               <Div 
               className='img-container'
               // style={{ backgroundColor: theme.bgContainer}}
