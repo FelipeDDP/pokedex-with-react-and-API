@@ -60,7 +60,7 @@ export const PokemonDetails = () => {
 
         }
         getPokemonDetails(name)
-    }, [ability])
+    }, [name])
 
     const removeUnderscore = (str) => str.replace(/-/g, ' ')
 
@@ -90,7 +90,7 @@ export const PokemonDetails = () => {
                                     <li key={move.id}>
                                         <styles.moveBox>
                                             <h4>{removeUnderscore(move.name)}</h4>
-                                            <p class="type">{move.type}</p>
+                                            <p className="type">{move.type}</p>
                                             <p>{checkPower(move.power)}</p>
                                             <p>PP: {move.pp}/{move.pp}</p>
                                         </styles.moveBox>
